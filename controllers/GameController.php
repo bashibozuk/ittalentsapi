@@ -10,16 +10,17 @@ namespace app\controllers;
 
 use app\actions\GameEndAction;
 use app\actions\GameStartAction;
+use app\components\BaseController;
+use app\components\GameDataProviderPreparator;
 use app\models\GamePlay;
-use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\rest\IndexAction;
 
-class GameController extends \yii\rest\ActiveController
+class GameController extends BaseController
 {
     public $modelClass = 'app\models\User';
 
-    public function afterAction($action, $result)
+/*    public function afterAction($action, $result)
     {
         if ($httpOrigin = ArrayHelper::getValue($_SERVER, 'HTTP_ORIGIN')) {
             // CORS ajax request
@@ -30,7 +31,7 @@ class GameController extends \yii\rest\ActiveController
 
 
         return parent::afterAction($action, $result);
-    }
+    }*/
 
     public function actions()
     {
@@ -44,6 +45,7 @@ class GameController extends \yii\rest\ActiveController
             'index' => [
                 'class' => IndexAction::className(),
                 'modelClass' => GamePlay::className(),
+                'prepareDataProvider' => [GameDataProviderPreparator::className(), 'prepareDataProvider']
             ]
         ];
     }

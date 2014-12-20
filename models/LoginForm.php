@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Context;
 use Yii;
 use yii\base\Model;
 
@@ -28,6 +29,7 @@ class LoginForm extends Model
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
+            ['username', 'validateUsername'],
             ['password', 'validatePassword'],
         ];
     }
@@ -47,6 +49,14 @@ class LoginForm extends Model
             if (!$user || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'Incorrect username or password.');
             }
+        }
+    }
+
+    public function validateUsername()
+    {
+        if (!$this->getUser() ||
+            $this->getUser()->game_id != Context::getInstance()->gameID) {
+            $this->addError('username', sprintf('User %s does not exist', $this->username));
         }
     }
 

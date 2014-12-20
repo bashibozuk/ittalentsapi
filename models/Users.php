@@ -34,6 +34,7 @@ class Users extends \yii\db\ActiveRecord
         return [
             [['game_id'], 'integer'],
             [['email', 'username', 'avatar', 'authKey', 'accessToken'], 'string'],
+            [['username'], 'unique'],
             [['password'], 'required'],
             [['password'], 'string', 'max' => 32]
         ];

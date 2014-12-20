@@ -9,6 +9,7 @@
 namespace app\models;
 
 
+use app\components\Context;
 use yii\base\Model;
 
 class RegisterForm extends Model {
@@ -35,8 +36,7 @@ class RegisterForm extends Model {
     public function rules()
     {
         return [
-            [['username', 'email', 'password', 'password_repeat', /*'captcha'*/], 'required'],
-          //  [['captcha'], 'captcha'],
+            [['username', 'email', 'password', 'password_repeat',], 'required'],
             [['password'], 'compare'],
             [['email'], 'email'],
             [['avatar'], 'string']
@@ -47,7 +47,19 @@ class RegisterForm extends Model {
     {
         $this->_user = new User();
         $this->_user->attributes = array_intersect_key($this->attributes, $this->_user->attributes);
+        $this->_user->game_id = Context::getInstance()->gameID;
 
-        return $this->_user->save();
+        $attrNames = array_keys($this->attributes);
+        if (!$this->_user->save()) {
+            foreach ($this->_user->getErrors() as $field => $error) {
+                if (in_array($field, $attrNames)) {
+                    $this->addError($field, $error);
+                }
+            }
+
+            return false;
+        }
+
+        return true;
     }
 } 

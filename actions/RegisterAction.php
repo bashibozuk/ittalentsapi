@@ -26,7 +26,7 @@ class RegisterAction extends Action
     public function run()
     {
         $form = new RegisterForm();
-        if ($form->load($_POST, '') && $form->register()) {
+        if ($form->load($_POST, '') && $form->validate() && $form->register()) {
             return $form->getUser();
         }
 

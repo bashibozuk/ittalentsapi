@@ -1,0 +1,20 @@
+// list users
+curl -X GET -i -H "Accept:application/json" -H "X-GameID:101" "http://ittalentsapi.local/users/?page=1&per-page=10&sortField=username&sortDirection=DESC"
+
+// register user
+curl -X POST -i -H "Accept:application/json" -H "X-GameID:101" "http://ittalentsapi.local/users/register" -d "username=user123&email=asdf@mailinator.com&password=test&password_repeat=test&avatar=test"
+
+// login user
+curl -X POST -i -H "Accept:application/json" -H "X-GameID:101" "http://ittalentsapi.local/users/login" -d "username=user123&password=test"
+
+// change password
+curl -X POST -i -H "Accept:application/json" -H "X-GameID:101" "http://ittalentsapi.local/users/change-password" -d "email=asdf@mailinator.com&password=testtest&password_repeat=testtest"
+
+// list games
+curl -X GET -i -H "Accept:application/json" -H "X-GameID:101" "http://ittalentsapi.local/game/?page=1&per-page=10&sortField=username&sortDirection=DESC&expand=user"
+
+//start game
+curl -X GET -i -H "Accept:application/json" -H "X-GameID:101" "http://ittalentsapi.local/game/game-start?user_id=1"
+
+//end game
+curl -X GET -i -H "Accept:application/json" -H "X-GameID:101" "http://ittalentsapi.local/game/?page=1&per-page=10&sortField=username&sortDirection=DESC&expand=user"

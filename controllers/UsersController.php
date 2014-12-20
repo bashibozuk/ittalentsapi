@@ -2,16 +2,18 @@
 
 namespace app\controllers;
 
+use app\components\BaseController;
+use app\components\DataProviderPreparator;
 use yii\helpers\ArrayHelper;
 
-class UsersController extends \yii\rest\ActiveController
+class UsersController extends BaseController
 {
     public $modelClass = 'app\models\User';
 
     /**
      * @inheritdoc
      */
-    public function afterAction($action, $result)
+  /*  public function afterAction($action, $result)
     {
         if ($httpOrigin = ArrayHelper::getValue($_SERVER, 'HTTP_ORIGIN')) {
             // CORS ajax request
@@ -22,11 +24,16 @@ class UsersController extends \yii\rest\ActiveController
 
 
         return parent::afterAction($action, $result);
-    }
+    }*/
 
     public function actions()
     {
-        return array_merge(parent::actions(), [
+        return [
+            'index' => [
+                'class' => 'yii\rest\IndexAction',
+                'modelClass' => $this->modelClass,
+                'prepareDataProvider' => [DataProviderPreparator::className(), 'prepareDataProvider']
+            ],
             'login' => [
                 'class' => 'app\actions\LoginAction'
             ],
@@ -36,7 +43,7 @@ class UsersController extends \yii\rest\ActiveController
             'change-password' => [
                 'class' => 'app\actions\ChangePassword'
             ]
-        ]);
+        ];
     }
 
     protected function verbs()
@@ -44,7 +51,8 @@ class UsersController extends \yii\rest\ActiveController
         return array_merge(parent::verbs(), [
             [
                 'login' => 'POST',
-                'register' => 'POST'
+                'register' => 'POST',
+                'change-password' => 'POST'
             ]
         ]);
     }

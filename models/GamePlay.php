@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Context;
 use Yii;
 
 /**
@@ -43,6 +44,7 @@ class GamePlay extends \yii\db\ActiveRecord
             [['score'], 'required', 'on' => 'end'],
             [['user_id'], 'exist', 'targetClass' => User::className(), 'targetAttribute' => 'id'],
             [['start_time', 'end_time'], 'safe'],
+            [['user_id'], 'checkGameId'],
             [['end_time'], 'required', 'on' => 'end'],
             [['start_time'], 'required', 'on' => 'start'],
         ];
@@ -63,8 +65,20 @@ class GamePlay extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getUser()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'user_id']);
+    }
+
     public function isHighScore()
     {
         return self::find()->where('game_id = :game_id AND score > :score', [':game_id' => $this->game_id, ':score' => $this->score])->count() <= 99;
+    }
+
+    public function checkGameId()
+    {
+        if ($this->game_id != Context::getInstance()->gameID) {
+            $this->addError('game_id', 'Invalid Game ID');
+        }
     }
 }

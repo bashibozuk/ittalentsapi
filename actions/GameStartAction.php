@@ -9,6 +9,7 @@
 namespace app\actions;
 
 
+use app\components\Context;
 use app\models\GamePlay;
 use yii\rest\Action;
 
@@ -25,12 +26,12 @@ class GameStartAction extends Action
      * @param $user_id
      * @return array
      */
-    public function run($game_id, $user_id)
+    public function run($user_id)
     {
         $model = new GamePlay();
         $model->setScenario('start');
         $model->start_time = time();
-        $model->game_id = $game_id;
+        $model->game_id = Context::getInstance()->gameID;
         $model->user_id =$user_id;
 
         if ($model->save()) {
