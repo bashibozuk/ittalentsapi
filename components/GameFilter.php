@@ -14,7 +14,8 @@ class GameFilter extends ActionFilter
 {
     public function beforeAction($action)
     {
-        $gameID = \Yii::$app->request->headers->get('X-GameID');
+     //   $gameID = \Yii::$app->request->headers->get('X-GameID');
+        $gameID = \Yii::$app->request->getQueryParam('X-GameID');
         if (!in_array($gameID, Game::$ids)) {
             throw new NotAcceptableHttpException('Provide valid X-GameID header');
             return false;

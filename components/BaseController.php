@@ -20,9 +20,9 @@ class BaseController  extends  Controller
             [
                 'class' => GameFilter::className(),
             ],
-            [
+            /*[
                 'class' => Cors::className()
-            ]
+            ]*/
         ]);
     }
 } 

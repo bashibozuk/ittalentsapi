@@ -13,7 +13,8 @@ ITTallents Season 3 JavaScript Projects API
  - край на игра
 
  За да ползвате АПИ-то за всяка заявка трябва да подавате
- хедър X-GameID:<id-то на вашата игра>
+ параметър в УРЛ-а X-GameID:<id-то на вашата игра>
+ <url>/?X-GameID=<gameId>
  ид-тата са
  101
  102

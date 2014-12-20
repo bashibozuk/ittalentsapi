@@ -45,7 +45,9 @@ $config = [
             'showScriptName' => false,
           //  'enableStrictParsing' => true,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'users']
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'users'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'game'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'test']
             ]
         ],
         'db' => require(__DIR__ . '/db.php'),
