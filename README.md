@@ -28,9 +28,9 @@ Actions
 ----------------------------------------------
 1) users - списък на потребители в определена игра
     GET  request
-    url - http://ittalentsapi.bashibozuk.eu/users?page=<Number|default: 1>&per-page=<Number|default: 20>&sortField=<Number|default: id>&sortDirection=<Number|default: 4|4 or 3>
+    url - http://ittalentsapi.bashibozuk.eu/users?page=Number|default: 1&per-page=Number|default: 20&sortField=Number|default: id&sortDirection=ASC|DESC|defaultASC
     params:
-        - page=<Number> - Номер на страница по подразбиране 1
+        - page=Number - Номер на страница по подразбиране 1
         - per-page - по колко на страница резултата да имате
         - sortField - по кое поле да ви се сортира резултата
         - sortDirection - посока на сортиране - ASC (по подразбиране) - нарастваща, DESC - намаляваща
@@ -70,13 +70,13 @@ Actions
         password_repeat - повторена парола
 
 5) game - списък с игри на потребители
-    url - http://ittalentsapi.bashibozuk.eu/games?exapand=user&page=<Number|default: 1>&per-page=<Number|default: 20>&sortField=<Number|default: id>&sortDirection=<Number|default: 4|4 or 3>
+    url - http://ittalentsapi.bashibozuk.eu/game?exapand=user&page=Number|default: 1&per-page=Number|default: 20&sortField=Number|default: id&sortDirection=Number|default: ASC|ASC or DESC>
     params:
      - expand - трябва да е равно на user за да ви даде данните за потребителя
      - page=<Number> - Номер на страница по подразбиране 1
      - per-page - по колко на страница резултата да имате
      - sortField - по кое поле да ви се сортира резултата
-     - sortDirection - посока на сортиране - 3(по подразбиране) - нарастваща, 4- намаляваща
+     - sortDirection - посока на сортиране - ASC(по подразбиране) - нарастваща, DESC- намаляваща
 
 6) game/start-game - връща целия обект при съксес , ид-то ви трябва за да приключите играта
     url -http://ittalentsapi.local/game/game-start?user_id=<Number>

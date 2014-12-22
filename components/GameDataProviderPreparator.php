@@ -30,14 +30,13 @@ class GameDataProviderPreparator extends DataProviderPreparator{
         $model = new $modelClass;
 
         $query->andWhere($modelClass::tableName() . '.game_id = :game_id', [':game_id' => Context::getInstance()->gameID]);
-
+        $query->andWhere($modelClass::tableName() . '.score IS NOT NULL');
         if (Context::getInstance()->sortField && $model->hasAttribute(Context::getInstance()->sortField)) {
             $direction = Context::getInstance()->sortType;
             $query->orderBy = [Context::getInstance()->sortField => ($direction == Context::SORT_DESC ? SORT_DESC  : SORT_ASC)];
         }
 
         $query->joinWith('user');
-        $query->select('game_play.*, users.*');
 
         return new ActiveDataProvider([
             'query' => $query,

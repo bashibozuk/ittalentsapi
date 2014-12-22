@@ -38,6 +38,6 @@ class GameStartAction extends Action
             return $model->attributes;
         }
 
-        return $model->errors;
+        return ['errors' => $model->errors];
     }
 } 

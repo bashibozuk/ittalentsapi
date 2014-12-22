@@ -30,6 +30,6 @@ class RegisterAction extends Action
             return $form->getUser();
         }
 
-        return $form->getErrors();
+        return ['errors' => $form->getErrors()];
     }
 } 
