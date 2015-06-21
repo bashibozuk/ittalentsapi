@@ -10,22 +10,6 @@ class UsersController extends BaseController
 {
     public $modelClass = 'app\models\User';
 
-    /**
-     * @inheritdoc
-     */
-    public function afterAction($action, $result)
-    {
-        if ($httpOrigin = ArrayHelper::getValue($_SERVER, 'HTTP_ORIGIN')) {
-            // CORS ajax request
-            header('Access-Control-Allow-Origin: ' . $httpOrigin);
-            header('Access-Control-Allow-Credentials: true');
-            header('Access-Control-Allow-Headers: X-PINGOTHER');
-        }
-
-
-        return parent::afterAction($action, $result);
-    }
-
     public function actions()
     {
         return [
@@ -42,6 +26,10 @@ class UsersController extends BaseController
             ],
             'change-password' => [
                 'class' => 'app\actions\ChangePassword'
+            ],
+            'view' => [
+                'class' => 'yii\rest\ViewAction',
+                'modelClass' => $this->modelClass
             ]
         ];
     }
@@ -52,7 +40,9 @@ class UsersController extends BaseController
             [
                 'login' => 'POST',
                 'register' => 'POST',
-                'change-password' => 'POST'
+                'change-password' => 'POST',
+                'index' => 'GET',
+                'view' => 'GET'
             ]
         ]);
     }

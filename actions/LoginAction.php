@@ -29,7 +29,9 @@ class LoginAction extends Action{
         if ($form->load($_POST, '') && $form->validate() && $form->login()) {
             return $form->getUser()->attributes;
         }
-
+        if ($form->getErrors()) {
+            \Yii::$app->response->statusCode = 403;
+        }
         return ['errors' => $form->getErrors()];
     }
 } 

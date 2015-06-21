@@ -20,19 +20,6 @@ class GameController extends BaseController
 {
     public $modelClass = 'app\models\User';
 
-    public function afterAction($action, $result)
-    {
-        if ($httpOrigin = ArrayHelper::getValue($_SERVER, 'HTTP_ORIGIN')) {
-            // CORS ajax request
-            header('Access-Control-Allow-Origin: ' . $httpOrigin);
-            header('Access-Control-Allow-Credentials: true');
-            header('Access-Control-Allow-Headers: X-PINGOTHER');
-        }
-
-
-        return parent::afterAction($action, $result);
-    }
-
     public function actions()
     {
         return [
