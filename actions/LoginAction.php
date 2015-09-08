@@ -26,7 +26,7 @@ class LoginAction extends Action{
     public function run()
     {
         $form = new LoginForm();
-        if ($form->load($_POST, '') && $form->validate() && $form->login()) {
+        if ($form->load(\Yii::$app->request->bodyParams, '') && $form->validate() && $form->login()) {
             return $form->getUser()->attributes;
         }
         if ($form->getErrors()) {

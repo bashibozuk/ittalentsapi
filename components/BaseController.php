@@ -19,9 +19,6 @@ class BaseController  extends  Controller
     {
         return array_merge(parent::behaviors(), [
             [
-                'class' => GameFilter::className(),
-            ],
-            [
                 'class' => Cors::className(),
                 'cors' => [   // restrict access to
                     'Origin' => [ArrayHelper::getValue($_SERVER, 'HTTP_ORIGIN', '*')],
@@ -30,7 +27,10 @@ class BaseController  extends  Controller
                     'Access-Control-Request-Headers' => ['*'],
                     'Access-Control-Allow-Credentials' => true,
                  ]
-            ]
+            ],
+            [
+                'class' => GameFilter::className(),
+            ],
         ]);
     }
 

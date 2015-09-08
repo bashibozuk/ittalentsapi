@@ -26,7 +26,7 @@ class ChangePassword extends Action{
     public function run()
     {
         $model = new ChangePasswordForm();
-        if ($model->load($_POST, '') && $model->validate() && $model->changePassword()) {
+        if ($model->load(\Yii::$app->request->bodyParams, '') && $model->validate() && $model->changePassword()) {
             return true;
         }
 
